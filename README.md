@@ -1,30 +1,12 @@
-# 🌎 Google Translate Automation Tool
+# Google Translate Automation
 
-## What's This?
+A simple tool for automated translations using Google's web interface without the API. The core script is `google_translate.py` (~300 lines) which controls a browser to interact with Google Translate, while `translate_api.py` wraps this in a basic FastAPI server.
 
-Hey there! This is a fun little project I built to automate translations through Google Translate. I was messing around with web automation and wanted to see if I could create something useful while learning more about Selenium, FastAPI, and web scraping.
+What it does is pretty straightforward. When you make a translation request, it launches a headless Chrome browser using Selenium and navigates to the Google Translate website. Since Google Translate only supports around 5000 characters at once, the script splits your text into manageable chunks. It then pastes each chunk into the input field, waits for the translation to appear, and extracts the result. After processing all chunks, it combines them into your final translated text.
 
-## Why I Made This
+I added some basic measures like random delays between actions and rotating through different user agents to make it less obvious that it's automation. The tool works with all 190+ languages that Google Translate supports.
 
-I mostly built this as a learning project to:
-- Get better at web automation with Selenium
-- Practice creating APIs with FastAPI
-- Understand how to handle background tasks and job queuing
-- Learn how to bypass some basic bot detection (for educational purposes only!)
-
-## Features
-
-- Translate text between 190+ languages using Google Translate (without using any paid API)
-- Split long texts into manageable chunks automatically
-- API access with job status tracking
-- Random delays and user agent rotation to mimic human behavior
-
-## Components
-
-The project has a few main pieces:
-1. `google_translate.py` - The core translation engine using Selenium automation
-2. `translate_api.py` - A REST API built with FastAPI that makes the translation service available over HTTP
-3. Both can be used independently depending on your needs!
+I built this as a learning project to practice with Selenium and FastAPI. It's worth mentioning that this is strictly for personal use and education. Using this at scale would probably go against Google's terms of service, so for any serious applications, you should use their official API.
 
 ## How to Use It
 
@@ -59,34 +41,3 @@ python translate_api.py
 # Now you can access it at http://localhost:8080
 # Check out the auto-generated docs at http://localhost:8080/docs
 ```
-
-## ⚠️ Important Disclaimer
-
-**This is a personal learning project and is NOT intended for commercial use!** 
-
-Google Translate's terms of service don't allow automated access to their service outside of their official API. This project was created solely for:
-- Educational purposes
-- Personal learning
-- Understanding web automation techniques
-
-I don't take any responsibility if you get your IP blocked by Google or face any other consequences from using this tool beyond personal experimentation. Please respect Google's terms of service and consider using their official Translation API for any serious or commercial applications.
-
-## What I Learned
-
-Building this taught me a ton about:
-- Handling CAPTCHAs and anti-bot measures (ethically)
-- Building a job queue system for long-running tasks
-- Web automation best practices
-- Creating clean API documentation
-
-Feel free to check out the code, learn from it, or suggest improvements! Just remember - this is for educational purposes only!
-
-## Future Ideas
-
-If I keep working on this, I might add:
-- A simple UI with Streamlit
-- Better error handling
-- Support for more complex documents
-- Batch processing
-
-Let me know if you have any questions or suggestions!
